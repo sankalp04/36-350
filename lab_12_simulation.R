@@ -15,7 +15,7 @@ model_select = function(covariates, responses, cutoff)
 {
   index = c() #storing response column index
   df = data.frame(cov = covariates, res = responses)
-  print("I am here")
+  # print("I am here")
   model = lm(formula = res ~ cov.1 + cov.2 + cov.3 + cov.4 + cov.5 + cov.6, data = df)
   summ = summary(model)
   for (i in 23:28)
@@ -46,10 +46,11 @@ run_simulation = function(n_trials, n, p, cutoff)
     res = data$responses
     
     out = model_select(cov, res, cutoff)
+    # out = as.numeric(out)
     result = c(result, out)
   }
-  return(hist(result, main = paste("p values for", as.character(n), as.character(p))))
   
+  return(hist(result))
 }
 
 n_val = c(100, 1000,10000)
@@ -63,3 +64,4 @@ for(i in 1:length(p_val))
     run_simulation(5, n_val[j], p_val[i], 0.05)
   }
 }
+
