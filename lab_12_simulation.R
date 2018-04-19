@@ -32,3 +32,33 @@ model_select = function(covariates, responses, cutoff)
   mod.sum = model.summary(df_new)
   return(mod.sum$coefficients[,4])
 }
+
+
+run_simulation = function(n_trials, n, p, cutoff)
+{
+  result = c()
+  for(i in 1:n_trials)
+  {
+    data = generate_data(n,p)
+    
+    cov = data$covariates
+    res = data$responses
+    
+    out = model_select(cov, res, cutoff)
+    result = c(result, out)
+  }
+  return(hist(result, main = paste("p values for", as.character(n), as.character(p))))
+  
+}
+
+n_val = c(100, 1000,10000)
+
+p_val = c(10,20,50)
+
+for(i in 1:length(p_val))
+{
+  for(j in 1:length(n_val))
+{
+    run_simulation(5, n_val[j], p_val[i], 0.05)
+  }
+}
