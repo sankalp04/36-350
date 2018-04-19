@@ -15,8 +15,9 @@ model_select = function(covariates, responses, cutoff)
 {
   index = c() #storing response column index
   df = data.frame(cov = covariates, res = responses)
+  print("I am here")
   model = lm(formula = res ~ cov.1 + cov.2 + cov.3 + cov.4 + cov.5 + cov.6, data = df)
-  summ = model.summary(model)
+  summ = summary(model)
   for (i in 23:28)
   {
     if (summ[[4]][i] <= cutoff) 
@@ -29,7 +30,7 @@ model_select = function(covariates, responses, cutoff)
     return(index)
   }
   lm_new = lm(formula = L$responses ~ L$covariates[, index])
-  mod.sum = model.summary(df_new)
+  mod.sum = summary(lm_new)
   return(mod.sum$coefficients[,4])
 }
 
@@ -58,7 +59,7 @@ p_val = c(10,20,50)
 for(i in 1:length(p_val))
 {
   for(j in 1:length(n_val))
-{
+  {
     run_simulation(5, n_val[j], p_val[i], 0.05)
   }
 }
