@@ -6,7 +6,7 @@ generate_data = function(n, p)
   {
     cov[i,] = rnorm(p)
   }
-  return(list(mat = cov, responses = response))
+  return(list(covariates = cov, responses = response))
 }
 
 model_select = function(covariates, responses, cutoff)
