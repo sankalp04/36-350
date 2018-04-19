@@ -5,6 +5,7 @@ generate_data = function(n, p)
   for (i in 1:n)
   {
     cov[i,] = rnorm(p)
+  
   }
   return(list(mat = cov, responses = response))
 }
